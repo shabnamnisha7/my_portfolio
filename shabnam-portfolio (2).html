@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=DM+Mono:wght@300;400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -943,75 +944,80 @@
     .certs-grid { grid-template-columns: 1fr; }
     .resume-btns { flex-direction: column; }
   }
-  .intro {
-  position: fixed;
-  inset: 0;
-  background: #000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  animation: fadeOut 1s ease forwards;
-  animation-delay: 3.5s;
-}
-
-.intro-text {
-  color: white;
-  font-size: 3rem;
-  font-weight: bold;
-  letter-spacing: 2px;
-  white-space: nowrap;
-  overflow: hidden;
-  border-right: 3px solid white;
-  width: 0;
-  animation: typing 2s steps(13) forwards,
-             blink 0.7s infinite;
-}
-
-@keyframes typing {
-  from { width: 0; }
-  to { width: 13ch; }
-}
-
-@keyframes blink {
-  50% { border-color: transparent; }
-}
-
-@keyframes fadeOut {
-  to {
-    opacity: 0;
-    visibility: hidden;
+  .hero-text.hero-footer {
+    position: absolute;
+    left: 50%;
+    bottom: 6%;
+    transform: translateX(-50%);
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    width: min(92%, 960px);
+    text-align: center;
+    padding: 0 12px;
+    pointer-events: none;
+    animation: heroFooterPop 1s ease-out forwards;
   }
-}
-.typewriter {
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 3px solid var(--candy-pink);
-  width: 0;
-  font-family: var(--font-heading);
-  font-size: clamp(40px, 6vw, 90px);
-  color: var(--ink);
-  animation: typing 2.5s steps(13) forwards,
-             blink 0.7s infinite;
-}
 
-/* typing effect */
-@keyframes typing {
-  from { width: 0; }
-  to { width: 13ch; }
-}
+  .hero-footer-copy {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+  }
 
-/* cursor blink */
-@keyframes blink {
-  50% { border-color: transparent; }
-}
+  .hero-footer-main {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 10vw, 120px);
+    color: rgba(255,255,255,0.98);
+    letter-spacing: 0.12em;
+    line-height: 0.9;
+    text-shadow: 0 0 18px rgba(255, 20, 20, 0.18), 0 0 48px rgba(255, 20, 20, 0.08);
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+    animation: heroFooterTextIntro 1s ease-out 0.15s forwards;
+  }
+
+  .hero-footer-sub {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(30px, 4.5vw, 48px);
+    color: rgba(255,255,255,0.92);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-top: 0.2rem;
+    text-shadow: 0 0 14px rgba(255, 40, 40, 0.14);
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+    animation: heroFooterTextIntro 1s ease-out 0.25s forwards;
+  }
+
+  @keyframes heroFooterPop {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+
+  @keyframes heroFooterTextIntro {
+    from {
+      opacity: 0;
+      transform: translateY(24px) scale(0.96);
+      filter: blur(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
 
 </style>
 </head>
 <body>
-  <div class="intro">
-  <h1 class="intro-text">I'm Shabnam</h1>
-</div>
 
 <!-- Custom cursor -->
 <div id="cursor"></div>
@@ -1054,10 +1060,6 @@
 <!-- ── HERO ── -->
  
 <section id="hero">
-  <div class="hero-text">
-  <h1 class="typewriter">I'm Shabnam</h1>
-</div>
-
   <!-- Rising photo columns -->
   <div class="hero-col hero-col-far-left" data-speed="0.28">
     <div class="hero-col-frame"><img src="work1.jpg" alt=""/></div>
@@ -1093,6 +1095,12 @@
     <div class="hero-ctas">
       <a href="#projects" class="btn-filled">View Work</a>
       <a href="#contact" class="btn-ghost">Let's Talk →</a>
+    </div>
+  </div>
+  <div class="hero-text hero-footer">
+    <div class="hero-footer-copy">
+      <h1 class="hero-footer-main">HIII</h1>
+      <p class="hero-footer-sub">I’M SHABNAM</p>
     </div>
   </div>
 </section>
