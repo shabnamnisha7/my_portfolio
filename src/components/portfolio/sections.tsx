@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import {
   ArrowUpRight,
   BadgeCheck,
@@ -117,10 +118,19 @@ export function StorySection() {
 }
 
 export function SkillsSection() {
-  const skillOrbs = [
-    ["Python", "C", "Arduino", "MATLAB", "MySQL", "Git"],
-    ["Embedded C", "Sensors", "Microcontrollers", "Digital Electronics"],
-    ["Signals & Systems", "Debugging", "Visual Editing", "Problem Solving"],
+  const skillClusters = [
+    {
+      title: "Interface",
+      skills: ["Next.js", "React", "Tailwind", "Framer Motion", "Figma", "Spline"],
+    },
+    {
+      title: "Systems",
+      skills: ["Node.js", "Express", "MongoDB", "TypeScript", "Git", "API"],
+    },
+    {
+      title: "Hardware",
+      skills: ["Arduino", "Embedded C", "Sensors", "IoT", "MATLAB", "Electronics"],
+    },
   ];
 
   return (
@@ -133,31 +143,36 @@ export function SkillsSection() {
               Floating around the core <span className="royal-gradient">systems mindset</span>.
             </>
           }
-          copy="Instead of skill bars, the site frames Shabnam's toolkit as clustered capability islands that continue to grow through projects and experimentation."
+          copy="Instead of skill bars, the site uses layered skill orbs and glass clusters to make each capability feel active and earned."
         />
         <div className="grid gap-6 lg:grid-cols-3">
-          {skillOrbs.map((group, index) => (
+          {skillClusters.map((cluster, index) => (
             <Reveal
-              key={index}
+              key={cluster.title}
               delay={index * 0.08}
-              className="section-card glass-panel ambient-border flex min-h-[300px] flex-wrap content-start gap-3 rounded-[1.8rem]"
+              className="section-card glass-panel ambient-border relative overflow-hidden rounded-[2rem] p-6"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-white/8 via-transparent to-transparent" />
-              {group.map((skill, skillIndex) => (
-                <div
-                  key={skill}
-                  className={`animate-float-slow rounded-full border px-4 py-2 text-sm text-white/84 ${
-                    skillIndex % 3 === 0
-                      ? "border-gold/30 bg-gold/10"
-                      : skillIndex % 2 === 0
-                        ? "border-royal/25 bg-royal/10"
-                        : "border-white/12 bg-white/8"
-                  }`}
-                  style={{ animationDelay: `${skillIndex * 0.6}s` }}
-                >
-                  {skill}
-                </div>
-              ))}
+              <div className="absolute -right-8 top-8 h-24 w-24 rounded-full bg-royal/15 blur-3xl" />
+              <p className="text-sm uppercase tracking-[0.2em] text-gold/70">{cluster.title}</p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                {cluster.skills.map((skill, skillIndex) => (
+                  <motion.span
+                    key={skill}
+                    whileHover={{ y: -3, scale: 1.04 }}
+                    transition={{ type: "spring", stiffness: 180, damping: 16 }}
+                    className={
+                      "rounded-full border px-4 py-2 text-sm text-white/85 transition-transform duration-300 " +
+                      (skillIndex % 3 === 0
+                        ? "border-gold/30 bg-gold/10"
+                        : skillIndex % 2 === 0
+                          ? "border-royal/25 bg-royal/10"
+                          : "border-white/12 bg-white/8")
+                    }
+                  >
+                    {skill}
+                  </motion.span>
+                ))}
+              </div>
             </Reveal>
           ))}
         </div>
@@ -184,20 +199,21 @@ export function ProjectsSection() {
             <Reveal
               key={project.title}
               delay={index * 0.06}
-              className={`section-card glass-panel ambient-border rounded-[1.8rem] ${
-                index === 0 ? "lg:col-span-2" : ""
-              }`}
+              className={`section-card glass-panel ambient-border rounded-[1.8rem] ${index === 0 ? "lg:col-span-2" : ""}`}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-white/8 via-transparent to-royal/10" />
-              <div className="relative flex h-full flex-col">
+              <motion.div
+                whileHover={{ y: -10 }}
+                transition={{ type: "spring", stiffness: 160, damping: 16 }}
+                className="relative flex h-full flex-col overflow-hidden rounded-[1.8rem] border border-white/10 bg-white/5 p-6 shadow-card"
+              >
+                <div className="absolute -right-8 top-10 h-24 w-24 rounded-full bg-royal/20 blur-3xl" />
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <p className="text-sm uppercase tracking-[0.22em] text-white/45">
                       Project {String(index + 1).padStart(2, "0")}
                     </p>
-                    <h3 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-white">
-                      {project.title}
-                    </h3>
+                    <h3 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-white">{project.title}</h3>
                   </div>
                   <div className="rounded-full border border-white/12 bg-white/8 p-3">
                     <ArrowUpRight className="h-5 w-5 text-gold" />
@@ -212,17 +228,17 @@ export function ProjectsSection() {
                   ))}
                 </div>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <a className="rounded-full border border-white/12 bg-white/10 px-4 py-2 text-sm" href={project.hrefs.demo}>
+                  <a className="rounded-full border border-white/12 bg-white/10 px-4 py-2 text-sm transition hover:bg-white/15" href={project.hrefs.demo}>
                     Demo
                   </a>
-                  <a className="rounded-full border border-white/12 bg-white/5 px-4 py-2 text-sm" href={project.hrefs.github}>
+                  <a className="rounded-full border border-white/12 bg-white/10 px-4 py-2 text-sm transition hover:bg-white/15" href={project.hrefs.github}>
                     GitHub
                   </a>
-                  <a className="rounded-full border border-gold/30 bg-gold/10 px-4 py-2 text-sm" href={project.hrefs.caseStudy}>
+                  <a className="rounded-full border border-gold/30 bg-gold/10 px-4 py-2 text-sm transition hover:bg-gold/15" href={project.hrefs.caseStudy}>
                     Case study
                   </a>
                 </div>
-              </div>
+              </motion.div>
             </Reveal>
           ))}
         </div>

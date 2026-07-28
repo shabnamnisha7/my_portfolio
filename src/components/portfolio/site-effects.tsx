@@ -49,7 +49,7 @@ export function SiteEffects() {
 
     const handleOver = (event: Event) => {
       const target = event.target as HTMLElement | null;
-      setHovering(Boolean(target?.closest("a, button, input, textarea")));
+      setHovering(Boolean(target?.closest("a, button, input, textarea, label")));
     };
 
     window.addEventListener("mousemove", handleMove);
@@ -62,7 +62,7 @@ export function SiteEffects() {
 
   const lightStyle = useMemo(
     () => ({
-      background: `radial-gradient(circle at ${pointer.x}px ${pointer.y}px, rgba(244, 180, 0, 0.12), transparent 0), radial-gradient(circle at ${pointer.x}px ${pointer.y}px, rgba(30, 78, 216, 0.2), transparent 220px)`,
+      background: `radial-gradient(circle at ${pointer.x}px ${pointer.y}px, rgba(244, 180, 0, 0.12), transparent 0), radial-gradient(circle at ${pointer.x}px ${pointer.y}px, rgba(30, 78, 216, 0.22), transparent 220px)`,
     }),
     [pointer.x, pointer.y],
   );
@@ -74,14 +74,14 @@ export function SiteEffects() {
 
     cursorRef.current.animate(
       {
-        transform: `translate(${pointer.x - 6}px, ${pointer.y - 6}px) scale(${hovering ? 1.5 : 1})`,
+        transform: `translate(${pointer.x - 6}px, ${pointer.y - 6}px) scale(${hovering ? 1.6 : 1})`,
       },
       { duration: 180, fill: "forwards", easing: "ease-out" },
     );
 
     ringRef.current.animate(
       {
-        transform: `translate(${pointer.x - 18}px, ${pointer.y - 18}px) scale(${hovering ? 1.15 : 1})`,
+        transform: `translate(${pointer.x - 18}px, ${pointer.y - 18}px) scale(${hovering ? 1.18 : 1})`,
       },
       { duration: 280, fill: "forwards", easing: "ease-out" },
     );
@@ -95,6 +95,7 @@ export function SiteEffects() {
         style={{ scaleX }}
       />
       <div aria-hidden className="pointer-events-none fixed inset-0 z-[2] opacity-90" style={lightStyle} />
+      <div aria-hidden className="pointer-events-none fixed inset-0 z-[2] bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.06),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(30,78,216,0.16),transparent_34%)]" />
       <div aria-hidden className="noise-overlay z-[3]" />
       {!reducedMotion ? (
         <>
